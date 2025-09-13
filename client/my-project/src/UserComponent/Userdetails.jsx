@@ -40,7 +40,7 @@ const Userdetails = () => {
                 <div className="basis-2/5 pl-8">
                   <h2 className="font-Lato text-white text-sm">mahmudulhasan8627@gmail.com</h2>
                 </div>
-                <div  className="basis-1/5 pl-6">
+                <div  className="basis-1/5 pl-8">
                   <span className="basis-1/5 font-Lato text-white active:text-red-400 text-xl cursor-pointer"><AiFillDelete /></span>
                 </div>
               </div>
