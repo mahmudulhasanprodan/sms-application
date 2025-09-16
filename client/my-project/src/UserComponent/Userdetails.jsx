@@ -15,8 +15,6 @@ const onUserHandle = () => {
   seisOpenModal(!isOpenModal);
 };
 
-
-
   return (
     <>
       <div className="bg-BgColor h-[100vh] relative">
