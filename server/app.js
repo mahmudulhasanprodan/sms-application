@@ -35,7 +35,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // Route Handler
 app.use("/",loginRouter);
-app.use("/users",usersRouter);
+app.use("/user",usersRouter);
 app.use("/inbox", inboxRouter);
 
 

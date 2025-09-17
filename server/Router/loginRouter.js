@@ -7,7 +7,7 @@ const{getLogin} = require("../Controller/loginController")
 
 // Login Page
 
-router.get("/", getLogin)
+router.post("/", getLogin)
 
 
 module.exports = router;

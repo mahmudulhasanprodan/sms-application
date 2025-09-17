@@ -3,11 +3,14 @@ const router = express.Router();
 
 
 // Internal Imports
-const{getUsers} = require("../Controller/userController")
+const{getUsers} = require("../Controller/userController");
+const {avatarUpload} =require("../Middleware/Users/avatarUpload");
+const {addUserValidation,adduserValidatorHanler} = require("../Middleware/Users/peopleValidator");
 
-// Login Page
 
-router.post("/", getUsers)
+// user Page
+
+router.post("/", avatarUpload,addUserValidation,adduserValidatorHanler, getUsers);
 
 
 module.exports = router;
