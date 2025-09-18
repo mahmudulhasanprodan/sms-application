@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const path = require("path");
 const cookieParser = require("cookie-parser");
-
+const cors = require("cors");
 
 // Internal Imports
 const {notFoundHandler,errorHandler} = require("./Common/errorHandler");
@@ -23,6 +23,11 @@ mongoose.connect(process.env.CONNECTION_STRING)
 .catch((err) => console.log(err));
 
 // Request Parser
+app.use(cors({
+  origin: "http://localhost:5173",        // Vite frontend port
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"]
+}))
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
