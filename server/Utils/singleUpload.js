@@ -4,6 +4,7 @@ const path = require("path");
 const createError = require('http-errors');
 
 
+
 function uploader(
     sub_folder,
     file_format,
@@ -47,7 +48,10 @@ const upload = multer({
 });
  
  return  upload;
-}
+};
+
+
+module.exports = uploader;
 
 
 

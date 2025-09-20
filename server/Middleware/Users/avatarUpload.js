@@ -1,3 +1,5 @@
+// Internal Imports
+const uploader = require("../../Utils/singleUpload");
 
 function avatarUpload(req,res,next) {
   const upload = uploader(
@@ -8,6 +10,7 @@ function avatarUpload(req,res,next) {
   );
   // call the midleware function
   upload.any()(req, res, (err) => {
+    console.log(err)
     if (err) {
       res.status(500).json({
         error: {

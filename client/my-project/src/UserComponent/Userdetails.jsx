@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { FaPlusCircle } from "react-icons/fa";
 import Logo from "../assets/Logo.png"
 import { AiFillDelete } from "react-icons/ai";

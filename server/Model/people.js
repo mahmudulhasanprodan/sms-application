@@ -17,11 +17,11 @@ const PeopleSchema = mongoose.Schema({
     required: true,
   },
   Password: {
-    type: Number,
+    type: String,
     required: true,
   },
   ConfirmPassword: {
-    type: Number,
+    type: String,
     required: true,
   },
   Avatar: {

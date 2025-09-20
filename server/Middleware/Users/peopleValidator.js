@@ -47,10 +47,11 @@ const addUserValidation = [
 ];
 
 const adduserValidatorHanler = (req,res,next) => {
-      const Error = validationResult(req);
+      const Error = validationResult(req.body);
       const mappedError = Error.mapped();
+      console.log(mappedError)
       if(Object.keys(mappedError).length === 0){
-        next()
+        next();
       }else{
         //removed uploaded file
         if(req.files.length > 0){

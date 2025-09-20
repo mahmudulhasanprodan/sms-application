@@ -8,7 +8,7 @@ const People = require("../Model/people");
 
 async function getUsers(req,res){
     let newuser;
-    const hashPassword = bcrypt.hash(req.body.Password, 5);
+    const hashPassword = await bcrypt.hash(req.body.Password, 5);
   if(req.files && req.files.length > 0){
      newuser = new People({
         ...req.body,
@@ -17,7 +17,9 @@ async function getUsers(req,res){
      })
   }else{
     newuser = new People({
+        ...req.body,
         Password : hashPassword
+        
     })
   };
 
@@ -27,7 +29,9 @@ try {
     res.status(200).json({
        message : 'Data Succesfully Save'
     });
+    console.log(result);
 } catch (err) {
+    console.log(err)
     res.status(500).json({
         errors : {
             common: {

@@ -10,7 +10,7 @@ const {addUserValidation,adduserValidatorHanler} = require("../Middleware/Users/
 
 // user Page
 
-router.post("/", avatarUpload,addUserValidation,adduserValidatorHanler, getUsers);
+router.post("/",avatarUpload,addUserValidation,adduserValidatorHanler,getUsers);
 
 
 module.exports = router;
