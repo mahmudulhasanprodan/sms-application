@@ -1,6 +1,6 @@
 import React, { useState} from 'react'
 import { MdOutlineCancelPresentation } from "react-icons/md";
-
+import { SuccesToast } from '../../Utils/Utils';
 
 
 const Modal = ({onCloseModal}) => {
@@ -36,7 +36,6 @@ const handleSubmit = async (e) => {
         body : JSON.stringify(formData)
       },
     );
-    
     console.log(res)
   } catch (err) {
     console.log(err)

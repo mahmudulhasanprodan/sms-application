@@ -4,6 +4,8 @@ import Logo from "../assets/Logo.png"
 import { AiFillDelete } from "react-icons/ai";
 import Modal from '../commonComponent/Header/Modal';
 
+
+
 const Userdetails = () => {
 
 const[isOpenModal,seisOpenModal] = useState(false)
