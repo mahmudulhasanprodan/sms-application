@@ -10,14 +10,16 @@ async function getLogin(req,res,next){
     try {
             // Find The User
    const user = await People.findOne({
-        $or :[{phone: req.body.Phone},{Email:req.body.Email}]
+        $or :[{Phone: req.body.Phone},{Email:req.body.Email}]
    });
+
    // check Valid Password
    if(user && user._id){
        const isvalidPassword = await bcrypt.compare(
             req.body.Password,
             user.Password,
        )
+      
     if(isvalidPassword){
         // prepare the user object to token genarate
         const userObject = {
@@ -31,24 +33,31 @@ async function getLogin(req,res,next){
         const token = jwt.sign(userObject,process.env.JWT_SECRET,{
             expiresIn : process.env.JWT_EXPIRY
         });
-
-        // set cookie
-        res.cookie(process.env.COOKIE_NAME,token,{
-            maxAge : process.env.JWT_EXPIRY,
+         
+    
+        // Set Cookie
+        res.cookie(process.env.COOKIE_NAME, token, {
+            maxAge : 3600000,
             httpOnly: true,
-            signed: true
+            signed: true,
+            secure: false
         });
+        res.status(200).json({
+            msg: "Login Successfull"
+        })
+
     }else{
-        throw createError("Login Failed! Please try again!");
+         throw createError("Login Failed! Please try again!");
     }
    }else{
         throw createError("Login Failed! Please try again!");
    }
     } catch (err) {
+        console.log(err)
         res.status(500).json({
             error:{
                 common: {
-                    msg: err.message
+                    msg: err.message,
                 }
             }
         })

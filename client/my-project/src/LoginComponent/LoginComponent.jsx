@@ -1,9 +1,50 @@
-import React from 'react'
-import Header from '../commonComponent/Header/Header';
+import React from "react";
 import LoginImage from "../assets/loginpageimage.png"
 import Logo from "../assets/Logo.png"
+import { useState } from "react";
+import {useNavigate} from "react-router-dom"
+
 
 const LoginComponent = () => {
+
+const Navigate = useNavigate();
+const[isLoginForm,setisLoginForm] = useState({
+    Email: "",
+    Password: "",
+});
+
+//HandleChange Function start Here
+const HandleChange = (e) => {
+  setisLoginForm({
+    ...isLoginForm,
+    [e.target.name] : e.target.value,
+  })
+  console.log(e.target.value)
+};
+
+// HandleSubmit function start Here
+const  HandleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+        const res = await fetch("http://localhost:5000/",{
+          method: "POST",
+          headers: {
+            "Content-Type" : "application/json",
+          },
+          body: JSON.stringify(isLoginForm)
+        });
+        if(res.ok){
+          Navigate("/inbox")
+        console.log(res,"Login Successfull")
+        }else{
+          console.log("Login Failed")
+        }
+    } catch (err) {
+      console.log(err)
+    }
+};  
+
+
   return (
     <>
       <div className="bg-BgColor h-[100vh]">
@@ -31,19 +72,22 @@ const LoginComponent = () => {
               {/* Login Input is Here */}
               <div className="flex flex-col items-center justify-center pt-6">
                 <form
-                  action=""
-                  method="POST"
                   className="flex flex-col gap-y-4"
+                  onSubmit={HandleSubmit}
                 >
                   <input
                     type="email"
                     placeholder="Enter your mobile or email"
-                    className="py-3 rounded-sm pl-3 w-[400px]pl-3 border-[1px] bg-slate-800 border-slate-700"
+                    className="py-3 rounded-sm pl-3 w-[400px]pl-3 border-[1px] bg-slate-800 border-slate-700 text-white"
+                    name="Email"
+                    onChange={HandleChange}
                   />
                   <input
                     type="password"
                     placeholder="Enter your password"
-                    className="py-3 rounded-sm pl-3 w-[400px] border-[1px] bg-slate-800 border-slate-700"
+                    className="py-3 rounded-sm pl-3 w-[400px] border-[1px] bg-slate-800 border-slate-700 text-white"
+                    name="Password"
+                     onChange={HandleChange}
                   />
                   <div className="flex items-center justify-center">
                     <button className="w-48 py-2 bg-BgColor text-center text-white font font-bold text-xl rounded-sm cursor-pointer">Login</button>

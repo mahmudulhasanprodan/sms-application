@@ -8,13 +8,12 @@ import Modal from '../commonComponent/Header/Modal';
 
 const Userdetails = () => {
 
-const[isOpenModal,seisOpenModal] = useState(false)
-
+const[isOpenModal,setisOpenModal] = useState(false);
 
 
 // onUserHandle Funciton start Here
 const onUserHandle = () => {
-  seisOpenModal(!isOpenModal);
+  setisOpenModal(!isOpenModal);
 };
 
   return (
@@ -36,7 +35,7 @@ const onUserHandle = () => {
               <div className="z-30">
                 {isOpenModal && (
                   <div>
-                    <Modal onCloseModal={() => seisOpenModal(false)} />
+                    <Modal onCloseModal={() => setisOpenModal(false)} />
                   </div>
                 )}
               </div>

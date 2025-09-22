@@ -25,7 +25,7 @@ mongoose.connect(process.env.CONNECTION_STRING)
 // Request Parser
 app.use(cors({
   origin: "http://localhost:5173",        // Vite frontend port
-  methods: ["GET", "POST"],
+  methods: ["GET", "POST","DELETE","PUT"],
   allowedHeaders: ["Content-Type"]
 }))
 app.use(express.json());
