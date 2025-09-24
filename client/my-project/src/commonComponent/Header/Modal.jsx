@@ -1,7 +1,7 @@
 import React, { useState} from 'react'
 import { MdOutlineCancelPresentation } from "react-icons/md";
 import { SuccesToast } from '../../Utils/Utils';
-
+import axios from "axios"
 
 const Modal = ({onCloseModal}) => {
 
@@ -10,35 +10,48 @@ const [formData,setformData] = useState({
     Email : "",
     Phone : "",
     Password : "",
-    ConfirmPassword : "",
-    Avatar: true
-})
+    ConfirmPassword : "", 
+    Avatar: null
+});
+
+
 
 // handleChange Function is here
 const handleChange = (e) => {
+   if(e.target.name === "Avatar"){
     setformData({
+      ...formData,
+      [e.target.name] : e.target.files[0]
+    })
+   }else{
+     setformData({
       ...formData,
       [e.target.name] : e.target.value
     })
-    console.log( e.target.value);
+   }
 };
 
 // handleSubmit Function is here
 const handleSubmit = async (e) => {
+
+   const data = new FormData();
+    data.append("formData", formData);
+    data.append("Avatar", formData.Avatar);
+ 
   e.preventDefault();
+
   try {
-    const res = await fetch(
-      "http://localhost:5000/user",{
-        method : "POST",
-        headers : {
-          "Content-Type" : "application/json"
-        },  
-        body : JSON.stringify(formData)
+    const res = await axios.post(
+      "http://localhost:5000/user", data, {
+        headers:{
+          "Content-Type": "multipart/form-data",
+        } , 
       },
     );
+   
     console.log(res)
   } catch (err) {
-    console.log(err)
+    console.log(err.message)
   }
 };
 
@@ -51,7 +64,7 @@ const handleSubmit = async (e) => {
           </span>
         </div>
         <div>
-          <form  method='POST' action="http://localhost:5000/user"  className="flex flex-col gap-y-2 pl-8" onSubmit={handleSubmit}>
+          <form  className="flex flex-col gap-y-2 pl-8" onSubmit={handleSubmit} >
             <input
               type="text"
               placeholder="Enter your name"
@@ -89,7 +102,6 @@ const handleSubmit = async (e) => {
             />
             <input
               type="file"
-              placeholder="Enter your file"
               name="Avatar"
               className="font-Lato text-white text-md"
               onChange={handleChange}

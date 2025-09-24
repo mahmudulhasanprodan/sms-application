@@ -33,11 +33,12 @@ const  HandleSubmit = async (e) => {
           },
           body: JSON.stringify(isLoginForm)
         });
+        const data = await res.json();
         if(res.ok){
           Navigate("/inbox")
-        console.log(res,"Login Successfull")
+        console.log(data.msg)
         }else{
-          console.log("Login Failed")
+          console.log(data.msg)
         }
     } catch (err) {
       console.log(err)

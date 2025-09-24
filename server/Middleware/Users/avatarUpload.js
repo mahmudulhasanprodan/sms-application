@@ -10,7 +10,8 @@ function avatarUpload(req,res,next) {
   );
   // call the midleware function
   upload.any()(req, res, (err) => {
-    console.log(err)
+    console.log(err);
+    
     if (err) {
       res.status(500).json({
         error: {
@@ -21,6 +22,7 @@ function avatarUpload(req,res,next) {
       });
     } else {
       next();
+      console.log(req)
     }
   });
 }

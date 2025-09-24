@@ -32,7 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 // Static folder
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "Public")));
 
 // Cookier Parser
 app.use(cookieParser(process.env.COOKIE_SECRET));

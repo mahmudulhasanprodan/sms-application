@@ -13,7 +13,9 @@ function uploader(
 ) {
     
     // Upload Folder Selection
-const UPLOAD_FOLDER = `${__dirname}./../../Public/Upload/${sub_folder}`;
+const UPLOAD_FOLDER = `${__dirname}/server/Public/Upload/${sub_folder}`;
+
+
 
 // Define the storage
 const storage = multer.diskStorage({
@@ -22,11 +24,12 @@ const storage = multer.diskStorage({
     },
     filename : (req,file,cb) => {
         const fileExt = path.extname(file.originalname);
-        const fileName = file.originalname()
+        const fileName = file.originalname
                         .replace(fileExt,"")
-                        .toLowercase()
+                        .toLowerCase()
                         .split(" -")
                         .join("-") + "-" + Date.now()
+                        console.log(fileName)
         cb(null, fileName + fileExt)                
     }
 })
@@ -48,6 +51,7 @@ const upload = multer({
 });
  
  return  upload;
+ console.log(upload)
 };
 
 

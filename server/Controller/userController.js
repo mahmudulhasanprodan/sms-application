@@ -43,7 +43,25 @@ try {
     
 };
 
+async function getData(req,res){
+   try {
+     const realUser = await People.find();
+     res.status(200).json({
+        UserData: realUser,
+     })
+   } catch (err) {
+      res.status(200).json({
+        error: {
+            common: {
+                msg: err.message
+            }
+        }
+      })
+   }
+};
+
 
 module.exports = {
-    getUsers
+    getUsers,
+    getData
 }

@@ -3,18 +3,29 @@ import { FaPlusCircle } from "react-icons/fa";
 import Logo from "../assets/Logo.png"
 import { AiFillDelete } from "react-icons/ai";
 import Modal from '../commonComponent/Header/Modal';
+import axios from "axios";
+import { useEffect } from 'react';
 
 
 
 const Userdetails = () => {
 
 const[isOpenModal,setisOpenModal] = useState(false);
+const[userData,setuserData] = useState([]);
+
+useEffect(() => {
+   axios.get("http://localhost:5000/user")
+   .then((data) => setuserData(data.data.UserData) )
+   .catch((err) => console.log(err))
+},[])
 
 
 // onUserHandle Funciton start Here
 const onUserHandle = () => {
   setisOpenModal(!isOpenModal);
 };
+
+console.log(userData)
 
   return (
     <>
@@ -55,16 +66,17 @@ const onUserHandle = () => {
                 </li>
               </ul>
               {/* Users Details */}
-              <div className="flex items-center justify-between pt-2 border-b-[1px] pb-2">
+              {userData?.map((item) => (
+                 <div className="flex items-center justify-between pt-2 border-b-[1px] pb-2" key={item._id}>
                 <div className="flex items-center gap-x-3 basis-1/5 pl-3">
                   <picture>
-                    <img src={Logo} alt={Logo} className="w-12 h-12" />
+                    <img src={item.Avatar} alt={item.Avatar} className="w-12 h-12" />
                   </picture>
-                  <h2 className="text-white font-Lato  text-sm">User2</h2>
+                  <h2 className="text-white font-Lato  text-sm">{item.Name}</h2>
                 </div>
                 <div className="basis-2/5 pl-8">
                   <h2 className="font-Lato text-white text-sm">
-                    mahmudulhasan8627@gmail.com
+                    {item.Email}
                   </h2>
                 </div>
                 <div className="basis-1/5 pl-8">
@@ -73,6 +85,8 @@ const onUserHandle = () => {
                   </span>
                 </div>
               </div>
+              ))}
+             
             </div>
           </div>
         </div>
